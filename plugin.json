@@ -1,0 +1,64 @@
+{
+  "id": "materials",
+  "kind": "plugin",
+  "version": "1.0.19",
+  "label": "UEFN Materials",
+  "description": "UEFN material editing & graph tools (2026) \u2014 create/duplicate materials & instances, edit graphs, flags, assign to meshes. Bundles Materials skill: always layout graphs (no stacked nodes), PBR + MF_ patterns, water recipes, publish validators.",
+  "min_app_version": "1.0.0",
+  "default_enabled": true,
+  "secret_keys": [],
+  "contributes": {
+    "agent.tools": {
+      "category": "materials",
+      "tools": [
+        "create_material",
+        "create_material_instance",
+        "duplicate_material",
+        "connect_material_nodes",
+        "disconnect_material_nodes",
+        "connect_material_output",
+        "add_material_expression",
+        "delete_material_expression",
+        "clear_material_expressions",
+        "set_material_expression_property",
+        "get_material_expression_info",
+        "get_material_info",
+        "set_material_flags",
+        "layout_material_expressions",
+        "list_material_expressions",
+        "list_uefn_material_expression_classes",
+        "assign_material_to_mesh",
+        "set_material_instance_scalar",
+        "set_material_instance_vector",
+        "set_material_instance_texture",
+        "recompile_material"
+      ],
+      "intent_pattern": "\\b(material|shader|mi_|material\\s*instance|base\\s*color|emissive|material\\s*graph|material\\s*node|blend\\s*mode|two[\\s-]?sided|roughness|metallic|water\\s*material|ocean|waterfall|lake|river|rapids|foam|caustic|material\\s*function|\\bmf_)\\b",
+      "plan_tools": [
+        "get_material_expression_info",
+        "get_material_info",
+        "list_material_expressions",
+        "list_uefn_material_expression_classes"
+      ]
+    },
+    "walkthrough": {
+      "id": "materials",
+      "title": "Materials tools ready",
+      "auto_start": "first_enable",
+      "settings_tab": "Store",
+      "steps": [
+        {
+          "target": "settings.store.root",
+          "title": "Materials tools ready",
+          "body": "Material editing MCP tools are live. Ask the agent to create, edit, or fix UEFN materials and instances.",
+          "advance": "next",
+          "mode": "rect"
+        }
+      ]
+    }
+  },
+  "backend": {
+    "entry": "backend",
+    "register": "register"
+  }
+}
