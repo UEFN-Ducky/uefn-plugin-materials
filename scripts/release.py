@@ -127,7 +127,7 @@ def upload_zip_file(base_url: str, api_key: str, zip_path: Path) -> dict:
             "Content-Type": f"multipart/form-data; boundary={boundary}",
             "Accept": "application/json",
             "User-Agent": "UEFN-Ducky-PluginRelease/1.0",
-            "Origin": base_url.rstrip("/"),
+            # Do not send Origin — /api/files/app-release returns HTTP 400 with it.
         },
         method="POST",
     )
@@ -154,7 +154,13 @@ def publish(zip_path: Path, *, category: str, changelog: str) -> None:
     print(f"uploading {zip_path.name} via /api/files/app-release…")
     uploaded = upload_zip_file(base, key, zip_path)
     file_meta = uploaded.get("file") if isinstance(uploaded.get("file"), dict) else {}
-    file_id = str(file_meta.get("id") or uploaded.get("id") or "").strip()
+    file_id = str(
+        uploaded.get("fileId")
+        or uploaded.get("file_id")
+        or file_meta.get("id")
+        or uploaded.get("id")
+        or ""
+    ).strip()
     zip_url = str(uploaded.get("url") or "").strip()
     if not file_id and not zip_url:
         raise SystemExit(f"Upload missing file id/url: {uploaded}")

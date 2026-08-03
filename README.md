@@ -11,4 +11,4 @@ Install or update from **Settings → Store** in the app — do not install from
 py scripts/build_zip.py
 ```
 
-Writes `deploy/materials-*.ducky-plugin.zip` (scripts/ and deploy/ are not packed).
+Writes `deploy/materials-1.0.16.ducky-plugin.zip` (scripts/ and deploy/ are not packed).

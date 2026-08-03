@@ -1,10 +1,10 @@
 ---
 name: materials
 description: "Create, edit, and fix UEFN materials (2026) — registry tools, MF_ patterns, water recipes, publish validators. Always layout_material_expressions (never leave nodes stacked). Wire every pin; validate_uefn_asset before ship; UEFN ≠ full Unreal"
-license: All Rights Reserved
+license: Ducky Source-Available License v1.0
 metadata:
   label: UEFN Materials
-  version: 20
+  version: 21
   author: UEFN-Ducky
   copyright: Copyright 2026 UEFN-Ducky
   allow_redistribute: false
@@ -13,6 +13,9 @@ metadata:
 ---
 
 # UEFN Materials — create and fix (2026)
+
+**SERIAL saves:** never parallel `save_current_level` with other heavy editor
+calls in the same turn (`skill_read_subskill("uefn", "batch_commands")`).
 
 Ships with the **Materials** desktop plugin (Settings → Store). Enable the plugin
 and opt in under Tools & MCPs so material MCP tools are on the `uefn-ducky` bridge.
