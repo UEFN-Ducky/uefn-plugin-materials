@@ -15,7 +15,7 @@ metadata:
 | Material renders black | Nothing wired to BaseColor/Emissive, or Masked blend with OpacityMask 0 | `list_material_expressions` → wire color via `connect_material_nodes` / `connect_material_output` → `recompile_material` |
 | Edit made but level still shows old look | Recompile or saves skipped | `recompile_material` → save asset → `save_current_level()` — all three, in order |
 | **Everything stacked on one spot in material graph** | Nodes added at `(0,0)` / layout skipped | `layout_material_expressions` → `save_asset`. Always layout after graph edits |
-| Asset "created" but not in Content Browser | Never saved / wrong folder (invented `/Game/...` or missing leading `/`) | Must be under `content_root` (e.g. `/VideoTest/Materials`); verify with `does_asset_exist`; re-save with `save_asset` |
+| Asset "created" but not in Content Browser | Never saved / wrong folder (invented `/Game/...` or missing leading `/`) | Must be under `content_root` (e.g. `/MyProject/Materials`); verify with `does_asset_exist`; re-save with `save_asset` |
 | Cook: Disallowed reference to `/Game/Materials/...` | New mats created under `/Game/` instead of project mount | Recreate under `{content_root}Materials/...`, reassign actors, delete `/Game/` junk |
 | Texture parameter empty after import | Import created a different path than assumed | `search_assets(search="T_...")` for the actual `/Game/...` path, then `set_material_instance_texture` |
 | Material too heavy / fails to render on some platforms | Over the ~500-instruction UEFN cap | Simplify the graph: fewer Noise nodes, bake effects into textures, use `MF_QualitySwitch_Material_Attributes` |

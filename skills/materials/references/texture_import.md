@@ -25,16 +25,16 @@ after Blender or Marketplace import. Fix maps before authoring complex graphs.
 | Emissive | `T_…_E` | color |
 | Opacity / Mask | `T_…_Msk` | grayscale |
 
-Paths under `{content_root}Textures/...` (e.g. `/VideoTest/Textures/...`).
+Paths under `{content_root}Textures/...` (e.g. `/MyProject/Textures/...`).
 
 ## Import
 
 ```
-# FIRST: get_project_info() → content_root (e.g. /VideoTest/)
+# FIRST: get_project_info() → content_root (e.g. /MyProject/)
 import_asset({"source_file": "C:/art/T_Crate_BC.png",
-              "destination_path": "/VideoTest/Textures"})
+              "destination_path": "/MyProject/Textures"})
 # or omit destination_path / pass "" and let the listener auto-pin
-get_asset_info({"asset_path": "/VideoTest/Textures/T_Crate_BC"})
+get_asset_info({"asset_path": "/MyProject/Textures/T_Crate_BC"})
 save_asset / save_directory → save_current_level()
 ```
 

@@ -23,15 +23,15 @@ M_Prop_Master          ← graph + parameters (edit rarely)
 
 ```
 # folder = get_project_info().content_root + "Materials" — never /Game/Materials
-create_material({"asset_name": "M_Prop_Master", "folder": "/VideoTest/Materials"})
+create_material({"asset_name": "M_Prop_Master", "folder": "/MyProject/Materials"})
 # add TextureSampleParameter / ScalarParameter / VectorParameter via registry…
-create_material_instance({"parent_material_path": "/VideoTest/Materials/M_Prop_Master",
+create_material_instance({"parent_material_path": "/MyProject/Materials/M_Prop_Master",
                           "asset_name": "MI_Prop_Wood",
-                          "folder": "/VideoTest/Materials/Instances"})
+                          "folder": "/MyProject/Materials/Instances"})
 set_material_instance_texture({...})
 set_material_instance_scalar({...})
 set_material_instance_vector({...})
-recompile_material({"material_path": "/VideoTest/Materials/M_Prop_Master"})
+recompile_material({"material_path": "/MyProject/Materials/M_Prop_Master"})
 assign_material_to_mesh({... "material_path": ".../MI_Prop_Wood"})
 save_current_level()
 ```

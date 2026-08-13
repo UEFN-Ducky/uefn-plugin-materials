@@ -9,9 +9,13 @@ metadata:
 
 ## Rainbow / animated color material
 
-Use **`execute_python`** — flat material tools only do solid colors and simple connects.
-Call `uefn_editor_python_hints(topic="materials")` first. **No Custom/HLSL node** in UEFN;
-use Time → Multiply(speed) → Sine with phase offsets → ConstantBiasScale → AppendVector.
+Prefer registry tools (`create_material`, `add_material_expression`,
+`connect_material_nodes`, `layout_material_expressions`) — they cover Time /
+Sine / AppendVector. `execute_python` is a **labelled last resort** for a graph
+the registry cannot express, and it still freezes UEFN if you author many
+materials in one script. Call `uefn_editor_python_hints(topic="materials")`
+first. **No Custom/HLSL node** in UEFN; use Time → Multiply(speed) → Sine with
+phase offsets → ConstantBiasScale → AppendVector.
 
 ### Graph (standard nodes)
 
@@ -23,7 +27,7 @@ use Time → Multiply(speed) → Sine with phase offsets → ConstantBiasScale �
 6. Connect to **BaseColor** and **EmissiveColor**
 7. `recompile_material` → `save_loaded_asset` → `assign_material_to_mesh` → `save_current_level`
 
-### Runnable recipe (paste into `execute_python`)
+### Last-resort recipe (paste into `execute_python` only if registry tools cannot express this graph)
 
 ```python
 import unreal
@@ -31,7 +35,7 @@ import unreal
 def _connect(a, ao, b, bi):
     unreal.MaterialEditingLibrary.connect_material_expressions(a, ao, b, bi)
 
-def build_rainbow(asset_name, folder="/VideoTest/Materials", speed=0.8):  # content_root — never /Game/
+def build_rainbow(asset_name, folder="/MyProject/Materials", speed=0.8):  # content_root — never /Game/
     unreal.EditorAssetLibrary.make_directory(folder)
     at = unreal.AssetToolsHelpers.get_asset_tools()
     mat = at.create_asset(asset_name, folder, unreal.Material, unreal.MaterialFactoryNew())

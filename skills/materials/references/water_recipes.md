@@ -11,7 +11,7 @@ metadata:
 
 Uses `mf_reusable_patterns` + `recipe_recreate`. Exact scalar/vector/texture tables: `water_exact_defaults`.
 
-**Folder (example):** `{content_root}Materials/Water/` (e.g. `/VideoTest/Materials/Water/`) — never `/Game/Materials`.
+**Folder (example):** `{content_root}Materials/Water/` (e.g. `/MyProject/Materials/Water/`) — never `/Game/Materials`.
 
 ## Family map
 
