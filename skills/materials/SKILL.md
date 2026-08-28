@@ -1,18 +1,22 @@
 ---
 name: materials
-description: "Create, edit, and fix UEFN materials (2026) — registry tools, MF_ patterns, water recipes, publish validators. Always layout_material_expressions (never leave nodes stacked). Wire every pin; validate_uefn_asset before ship; UEFN ≠ full Unreal"
-license: Ducky Source-Available License v1.0
+description: "Create, edit, and fix UEFN materials (2026) — registry tools, MF_ patterns, water recipes, publish validators. Stars/starfield/night sky: starfield_recipe ONLY (no textures, no Niagara). Always layout_material_expressions (never leave nodes stacked). Wire every pin; validate_uefn_asset before ship; UEFN ≠ full Unreal"
+license: MIT
 metadata:
   label: UEFN Materials
-  version: 22
+  version: 24
   author: UEFN-Ducky
-  copyright: Copyright 2026 UEFN-Ducky
-  allow_redistribute: false
+  copyright: Copyright 2026 Mindful Path Company, LLC
+  allow_redistribute: true
   managed_by: uefn-ducky
   source_plugin_id: materials
 ---
 
 # UEFN Materials — create and fix (2026)
+
+**Epic UEFN MCP:** Settings → MCPs → **UEFN MCP (Epic)** (`unreal-mcp`). Bridge tools: `unreal__list_toolsets` → `unreal__describe_toolset` → `unreal__call_tool` (toolsets — not flat `unreal__create_entity`). Map: `skill_read_subskill("uefn", "epic_mcp")`. Ducky tools below stay for this skill's domain when Epic does not cover it.
+
+Optional Epic path: `editor_toolset.toolsets.material.MaterialTools` (+ material_instance). Prefer Ducky materials tools when already in use.
 
 **SERIAL saves:** never parallel `save_current_level` with other heavy editor
 calls in the same turn (`skill_read_subskill("uefn", "batch_commands")`).
@@ -34,6 +38,9 @@ mesh refs, and illegal property overrides — not “it compiled in the material
 **Advanced surfaces:** load `mf_reusable_patterns` for depth fade / sine WPO /
 animated UV masks / radial centre / fake specular (water, glass, lava, ice, cloth…).
 Water masters + 1:1 defaults: `water_recipes` + `water_exact_defaults`.
+**Stars / night sky (HARD):** `skill_read_subskill("materials", "starfield_recipe")`
+— that Catland ALU graph only. Never a star texture. Never Niagara sprites for a
+sky dome. Never Additive on a UEFN sky (Opaque Unlit Two-Sided).
 
 ## Tool ladder (in order)
 
@@ -148,6 +155,8 @@ Verify with `get_asset_info` / `get_material_info` / `validate_uefn_asset` — n
   Load when: Material looks wrong, won't compile, or submit/cook fails
 - `references/rainbow_material.md` — animated color via Time/Sine (execute_python)
   Load when: Rainbow / pulsing emissive effects
+- `references/starfield_recipe.md` — procedural ALU starfield (HARD: only star recipe)
+  Load when: stars, starfield, night sky, star sky, sky stars, procedural stars
 - `references/runtime_materials_verse.md` — Verse can only swap pre-made materials
   Load when: Runtime material changes from Verse
 - `references/texture_import.md` — sRGB, normals, ORM, compression
