@@ -99,6 +99,14 @@ Time → Multiply(speed) → Sine per channel with phase offsets → ConstantBia
 reference **Rainbow / animated color** (shipped with this skill pack). Do NOT reach for
 MaterialExpressionCustom — the UEFN editor has no Custom node; standard nodes cover it.
 
+### Stars / starfield / night sky (HARD — one recipe)
+
+This is **not** rainbow and **not** a textured sky. Load
+`skill_read_subskill("materials", "starfield_recipe")` and run that graph only.
+Never `T_StarField`, never a 5-node texture sky, never Niagara sprites for a
+dome. Rebuild an existing `M_StarSky` / `M_Starfield` in place. Opaque Unlit
+Two-Sided, emissive only.
+
 ### Material instances + parameters
 
 Give the parent material Scalar/Vector/Texture *parameter* nodes (not constants),

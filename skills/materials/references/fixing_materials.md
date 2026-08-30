@@ -28,6 +28,7 @@ metadata:
 | **Failed to translate Material for platform(s) … SM5/SM6/ES3_1** | Same as missing pins — cook translation fails on all targets | Fix missing inputs first; do not “ship anyway.” Prefer `duplicate_material` of a known-good water/PBR master |
 | **`AssetValidator_AssetReferenceRestrictions` / illegally references `/Game/Creative/.../CP_Ground_Plane`** | Persistent actor uses a Creative gallery mesh UEFN forbids as a project dependency | Delete/replace the actor mesh with a **project** `/Game/...` static mesh (import or duplicate into the project). Reset illegal refs. Re-validate the **level** + GameFeatureData |
 | **`ValkyrieValidator_Properties` … `bForceDisableNanite` override True** | Illegal FortStaticMeshComponent property override | Reset `bForceDisableNanite` to default (False). Do not force-disable Nanite to “fix” water planes |
+| **`Sky materials must be opaque or masked, and unlit`** | Additive (or lit) blend on a UEFN sky | `set_material_flags` **Opaque Unlit Two-Sided**. Keep the `starfield_recipe` graph — do not swap to a texture |
 | **Disallowed reference … Plugin: \<Island\>** (GameFeatureData) | Same illegal Creative mesh ref pulled into the cooked plugin | Fix the level actor first; re-save level; re-validate GameFeatureData |
 
 ## Publish / cook gate (do this)

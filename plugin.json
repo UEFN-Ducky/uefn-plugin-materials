@@ -1,9 +1,9 @@
 {
   "id": "materials",
   "kind": "plugin",
-  "version": "1.0.24",
+  "version": "1.0.27",
   "label": "UEFN Materials",
-  "description": "UEFN material editing & graph tools (2026) \u2014 create/duplicate materials & instances, edit graphs, flags, assign to meshes. Bundles Materials skill: always layout graphs (no stacked nodes), PBR + MF_ patterns, water recipes, publish validators.",
+  "description": "UEFN material editing & graph tools (2026) \u2014 create/duplicate materials & instances, edit graphs, flags, assign to meshes. Bundles Materials skill: always layout graphs (no stacked nodes), PBR + MF_ patterns, water recipes, starfield_recipe (only star/sky path), publish validators.",
   "min_app_version": "1.0.0",
   "default_enabled": true,
   "secret_keys": [],
@@ -33,7 +33,7 @@
         "set_material_instance_texture",
         "recompile_material"
       ],
-      "intent_pattern": "\\b(material|shader|mi_|material\\s*instance|base\\s*color|emissive|material\\s*graph|material\\s*node|blend\\s*mode|two[\\s-]?sided|roughness|metallic|water\\s*material|ocean|waterfall|lake|river|rapids|foam|caustic|material\\s*function|\\bmf_)\\b",
+      "intent_pattern": "\\b(material|shader|mi_|material\\s*instance|base\\s*color|emissive|material\\s*graph|material\\s*node|blend\\s*mode|two[\\s-]?sided|roughness|metallic|water\\s*material|ocean|waterfall|lake|river|rapids|foam|caustic|material\\s*function|\\bmf_|starfield|star\\s*sky|night\\s*sky|procedural\\s*star)\\b",
       "plan_tools": [
         "get_material_expression_info",
         "get_material_info",
