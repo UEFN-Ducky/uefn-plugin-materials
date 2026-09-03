@@ -42,6 +42,6 @@ assign_material_to_mesh
 ## Do not
 
 - Skip `save_current_level()` after assign (old look on island)
-- Invent Custom HLSL beyond known radial `acos(x)`
+- Use a Custom/HLSL node at all — UEFN has none (`list_uefn_material_expression_classes`); build curves from standard nodes (`mf_reusable_patterns` shows the acos approximation)
 - Hand-rebuild 300+ node masters when `duplicate_material` exists
 - Invent a texture / 5-node / Niagara star sky — `skill_read_subskill("materials", "starfield_recipe")` only

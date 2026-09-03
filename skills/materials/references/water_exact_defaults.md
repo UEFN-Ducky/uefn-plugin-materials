@@ -15,7 +15,7 @@ metadata:
 
 ## M_Lake / M_Lake_Cheaper (~253–261) — Translucent DefaultLit
 
-**MF_:** River WavesWPO, River Depth_UVs, FixedDepth, FakeSpecular, BreakOutFloat3Components, Custom `acos(x)` ×4 + `LakeCentre`.
+**MF_:** River WavesWPO, River Depth_UVs, FixedDepth, FakeSpecular, BreakOutFloat3Components, radial `acos` ×4 + `LakeCentre`. Epic's shipped MF_ assets contain those acos nodes already — **reuse the MF_, do not author a Custom node** (UEFN has none; `mf_reusable_patterns` has the standard-node approximation if you must rebuild it).
 
 | Param | Texture |
 |-------|---------|

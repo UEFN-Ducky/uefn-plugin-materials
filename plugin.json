@@ -1,7 +1,7 @@
 {
   "id": "materials",
   "kind": "plugin",
-  "version": "1.0.27",
+  "version": "1.0.29",
   "label": "UEFN Materials",
   "description": "UEFN material editing & graph tools (2026) \u2014 create/duplicate materials & instances, edit graphs, flags, assign to meshes. Bundles Materials skill: always layout graphs (no stacked nodes), PBR + MF_ patterns, water recipes, starfield_recipe (only star/sky path), publish validators.",
   "min_app_version": "1.0.0",

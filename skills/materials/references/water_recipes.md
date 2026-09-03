@@ -20,7 +20,7 @@ Uses `mf_reusable_patterns` + `recipe_recreate`. Exact scalar/vector/texture tab
 | Ocean | `M_Ocean` (~337) | `M_Ocean_Cheaper` (~192) | WavesWPO, Depth_UVs, Wave_Motion, Foam_Motion, FixedDepth, FakeSpecular |
 | Ocean distance | `M_Ocean_Distance` | — | foam + depth + fake spec |
 | Ocean radial | `M_Ocean_Radial` | `_Cheaper` | `*_Radial` + `IslandCentre` |
-| Lake | `M_Lake` | `_Cheaper` | River WPO/Depth_UVs + FixedDepth + Custom `acos` + `LakeCentre` |
+| Lake | `M_Lake` | `_Cheaper` | River WPO/Depth_UVs + FixedDepth + radial `acos` MF_ + `LakeCentre` |
 | River | `M_River` | `_Cheaper` | river MF stack |
 | Rapids | `M_Rapids` | `_Cheaper` | FixedDepth + foam tex / vertical mask |
 | Waterfall | `M_Waterfall` | `_Cheaper` | directional foam + WPO (no ocean MF_) |
@@ -82,6 +82,8 @@ gallery planes) as the ocean surface actor — submit hits
 Do **not** set `bForceDisableNanite=True` on the Fort static mesh component —
 `ValkyrieValidator_Properties` rejects that override.
 
-**Do:** place a project-owned plane/mesh under `/Game/...` (import or duplicate into
-the island content), assign `MI_Ocean*` / water MI, then `validate_uefn_asset` on the
-**level** as well as the material.
+**Do:** place a project-owned plane/mesh under the project content mount from
+`get_project_info().content_root` (e.g. `/MyProject/Meshes/SM_WaterSheet`) — import or
+duplicate the Creative plane into island content rather than referencing it in place.
+Assign `MI_Ocean*` / water MI, then `validate_uefn_asset` on the **level** as well as
+the material.

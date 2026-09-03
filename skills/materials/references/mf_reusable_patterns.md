@@ -13,7 +13,9 @@ Shared math lives in **Material Functions** (`MF_*`). Masters call them.
 Inspect functions with `execute_python` + `MaterialEditingLibrary.get_material_function_expressions`
 (registry `list_material_expressions` is Material-only). Stay under **500 instructions**.
 
-**Project rule:** create/edit only under the active project's `/Game/...` tree.
+**Project rule:** create/edit only under the project content mount from
+`get_project_info().content_root` (e.g. `/MyProject/Materials/...`). **Never**
+`/Game/Materials` — that cooks as `Disallowed reference to /Game/...`.
 
 ---
 
@@ -80,13 +82,23 @@ Wire the matching WPO MF into the depth add. **Use for:** scrolling normals/foam
 **Classic names:** `*_Radial` + vector `IslandCentre` / `LakeCentre`.
 
 ```
-dir = Normalize(Centre - WorldPosition)
-angleU = Frac( acos(dot(dir, const3)) / Tiling ).R   # Custom: return acos(x);
-depthV = DepthFade(...)
-Result = Append(angleU, depthV)
+dir      = Normalize(Centre - WorldPosition)
+d        = DotProduct(dir, const3)            # -1..1
+# There is NO Custom/HLSL node in UEFN, so acos() must be built from standard nodes.
+# Cheap standard-node acos approximation (0..1 output, good enough for shore rings):
+#   acos(d)/PI  ≈  0.5 - 0.5 * d * (1 + 0.19 * (1 - d*d))
+dd       = Multiply(d, d)
+poly     = Add(1.0, Multiply(0.19, OneMinus(dd)))
+angle01  = Subtract(0.5, Multiply(0.5, Multiply(d, poly)))
+angleU   = ComponentMask(Frac(Divide(angle01, Tiling)), R)
+depthV   = DepthFade(...)
+Result   = AppendVector(angleU, depthV)
 ```
 
-UEFN allows this known Custom `acos(x)` pattern for radial shores — do not invent other HLSL.
+**No Custom node exists in UEFN** — `list_uefn_material_expression_classes` reports
+`"No Custom/HLSL node in UEFN — use these standard nodes only."` Build the curve from
+standard nodes as above (or bake it into a small gradient texture and `TextureSample`
+it). Never write HLSL here.
 
 **Use for:** island oceans, circular lakes, radial dirt rings, vortex FX.
 

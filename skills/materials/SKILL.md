@@ -114,7 +114,7 @@ and confirm pins; never leave orphan math nodes in the graph.
 # content_root from get_project_info — example uses /catland/
 create_material({"asset_name": "M_MyColor", "folder": "/catland/Materials",
                  "base_color": [1.0, 0.2, 0.2]})
-find_devices / get_all_actors(label_filter="...")
+get_all_actors(label_filter=…) / get_all_actors(label_filter="...")
 assign_material_to_mesh({"actor_path": "<label>", "material_path":
          "/catland/Materials/M_MyColor", "slot_index": 0})
 validate_uefn_asset({"asset_path": "/catland/Materials/M_MyColor"})
