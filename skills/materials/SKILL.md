@@ -4,7 +4,7 @@ description: "Create, edit, and fix UEFN materials (2026) — registry tools, MF
 license: MIT
 metadata:
   label: UEFN Materials
-  version: 24
+  version: 25
   author: UEFN-Ducky
   copyright: Copyright 2026 Mindful Path Company, LLC
   allow_redistribute: true
@@ -14,9 +14,7 @@ metadata:
 
 # UEFN Materials — create and fix (2026)
 
-**Epic UEFN MCP:** Settings → MCPs → **UEFN MCP (Epic)** (`unreal-mcp`). Bridge tools: `unreal__list_toolsets` → `unreal__describe_toolset` → `unreal__call_tool` (toolsets — not flat `unreal__create_entity`). Map: `skill_read_subskill("uefn", "epic_mcp")`. Ducky tools below stay for this skill's domain when Epic does not cover it.
-
-Optional Epic path: `editor_toolset.toolsets.material.MaterialTools` (+ material_instance). Prefer Ducky materials tools when already in use.
+**Tool order (HARD):** 1) Official UEFN MCP first — `ducky_get_status`; when `epic_mcp_online` use nested `unreal__*` (`unreal__list_toolsets` → `unreal__describe_toolset` → `unreal__call_tool`; 5+ ops → ProgrammaticToolset `execute_tool_script`). 2) Ducky listener second (Epic-offline gaps + Ducky-only tools listed in this skill). 3) `execute_python` LAST — never a placement/layout path, even if Epic and listener already failed. Never spawn, move, or assign materials. Map: `skill_read_subskill("uefn", "epic_mcp")`.
 
 **SERIAL saves:** never parallel `save_current_level` with other heavy editor
 calls in the same turn (`skill_read_subskill("uefn", "batch_commands")`).
@@ -44,26 +42,31 @@ sky dome. Never Additive on a UEFN sky (Opaque Unlit Two-Sided).
 
 ## Tool ladder (in order)
 
-1. **Discover safe nodes**: `list_uefn_material_expression_classes` (build-aware).
-2. **Create/inspect**: `create_material`, `create_material_instance`, `duplicate_material`,
-   `get_material_info`, `list_material_expressions`, `get_material_expression_info`.
+0. **Epic first:** `ducky_get_status` → when `epic_mcp_online` use
+   `editor_toolset.toolsets.material.MaterialTools` (and material_instance) via
+   nested `unreal__*`. 5+ graph ops → ProgrammaticToolset `execute_tool_script`.
+1. **Listener second — discover:** `list_uefn_material_expression_classes` (build-aware).
+2. **Listener second — create/inspect:** `create_material`, `create_material_instance`,
+   `duplicate_material`, `get_material_info`, `list_material_expressions`,
+   `get_material_expression_info`.
 3. **Flags**: `set_material_flags` (two_sided, blend_mode Opaque/Masked/Translucent,
    shading_model) then `recompile_material`.
-4. **Graph (registry — prefer over execute_python)**:
+4. **Graph (Ducky registry — still ahead of execute_python)**:
    `add_material_expression` → `set_material_expression_property` →
    `connect_material_nodes` / `connect_material_output` →
    `disconnect_material_nodes` / `delete_material_expression` / `clear_material_expressions` →
    **`layout_material_expressions` (REQUIRED)** → **`recompile_material`**.
-5. **Apply/tune**: `assign_material_to_mesh` (static + skeletal),
-   `set_material_instance_scalar` / `_vector` / `_texture`.
+5. **Apply/tune:** Epic MaterialTools when online; else `assign_material_to_mesh`
+   (static + skeletal), `set_material_instance_scalar` / `_vector` / `_texture`.
+   Never `mesh.set_material` in `execute_python`.
 6. **Publish gate (required after any graph/level change):**
    `validate_uefn_asset({"asset_path": "<content_root>/Materials/M_X"})` — also validate the
    level / GameFeatureData if you placed meshes. Fix every `EditorValidator_Material`
    / `AssetValidator_AssetReferenceRestrictions` / `ValkyrieValidator_Properties` hit
    before claiming done.
 7. **`uefn_editor_python_hints(topic="materials")`** before any `execute_python`.
-8. **`execute_python` + `MaterialEditingLibrary`** only for what registry tools cannot express
-   (see **Rainbow / animated color**).
+8. **`execute_python` + `MaterialEditingLibrary` last** — only for what Epic and
+   registry tools cannot express (see **Rainbow / animated color**).
 
 ## Graph editing
 
