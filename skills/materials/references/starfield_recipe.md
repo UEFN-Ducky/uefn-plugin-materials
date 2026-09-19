@@ -7,8 +7,6 @@ metadata:
   load_condition: "User asks for stars, starfield, star sky, night sky, sky stars, procedural stars, T_StarField, or a star dome / sky sphere"
 ---
 
-**Tool order (HARD):** 1) Official UEFN MCP first (`ducky_get_status` → `epic_mcp_online` → nested `unreal__*`). 2) Ducky listener second. 3) `execute_python` LAST — never a placement path, even if Epic and listener failed. Map: `skill_read_subskill("uefn", "epic_mcp")`.
-
 # Starfield — the only recipe
 
 **This is the only way to make stars in UEFN.** There is no texture path, no

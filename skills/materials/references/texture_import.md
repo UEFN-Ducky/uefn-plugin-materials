@@ -7,8 +7,6 @@ metadata:
   load_condition: "User imports textures, maps look wrong (washed out, plastic, inverted normals), asks about sRGB, ORM, compression, or texture settings after FBX/PNG import"
 ---
 
-**Tool order (HARD):** 1) Official UEFN MCP first (`ducky_get_status` → `epic_mcp_online` → nested `unreal__*`). 2) Ducky listener second. 3) `execute_python` LAST — never a placement path, even if Epic and listener failed. Map: `skill_read_subskill("uefn", "epic_mcp")`.
-
 # Texture import — maps that actually shade
 
 Wrong texture settings are the #1 cause of "plastic / washed out / inverted bumps"
