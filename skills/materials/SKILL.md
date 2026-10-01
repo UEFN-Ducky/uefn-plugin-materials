@@ -4,7 +4,7 @@ description: "Create, edit, and fix UEFN materials (2026) — registry tools, MF
 license: MIT
 metadata:
   label: UEFN Materials
-  version: 26
+  version: 27
   author: UEFN-Ducky
   copyright: Copyright 2026 Mindful Path Company, LLC
   allow_redistribute: true
@@ -178,3 +178,12 @@ Verify with `get_asset_info` / `get_material_info` / `validate_uefn_asset` — n
 ## Verify
 
 `recompile_material` then `get_material_info`.
+
+## 42.30 notes
+
+- Epic `editor_toolset.toolsets.material_instance.MaterialInstanceTools` (create and set
+  MaterialInstanceConstant parameters) joins `MaterialTools` when `epic_mcp_online` —
+  uefn `epic_toolsets` for exact tool names.
+- The material editor's shader count no longer includes local vertex factory shaders
+  when static-mesh usage is off (viewport and platform stats are now right).
+- RVT Texture Sample nodes are colored like Texture Sample nodes.
